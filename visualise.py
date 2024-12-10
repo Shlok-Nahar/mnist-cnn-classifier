@@ -2,6 +2,7 @@ import os
 from tensorflow.keras.models import load_model
 from model_visualizations import load_histories, plot_training_vs_testing, plot_confusion_matrix, plot_roc_curve, plot_precision_recall_curve, plot_feature_maps, plot_model_architecture
 from main import load_data
+import tensorflow as tf
 
 directories = [
     "Graphs/Accuracy", "Graphs/Loss", 
@@ -15,8 +16,7 @@ for directory in directories:
 def main():
     histories = load_histories()
 
-    plot_training_vs_testing(histories, metric="accuracy", save_dir="Graphs/Accuracy")
-    plot_training_vs_testing(histories, metric="loss", save_dir="Graphs/Loss")
+    plot_training_vs_testing(histories, save_dir="Graphs")
 
     models = {
         "model_relu": load_model("Models/model_relu.h5"),
@@ -24,11 +24,8 @@ def main():
         "model_elu": load_model("Models/model_elu.h5")
     }
 
-    # Load the data
-    # Ensure that `load_data()` is defined to return train_images, train_labels, test_images, test_labels
     _, _, test_images, test_labels = load_data()
 
-    # Generate visualizations for each model
     for model_name, model in models.items():
         # Confusion Matrix
         plot_confusion_matrix(model, test_images, test_labels, model_name)
