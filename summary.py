@@ -1,9 +1,7 @@
 import matplotlib.pyplot as plt
-import json  # <-- Ensure json is imported
-import h5py
+import json
 
 def plot_training_vs_testing(model_name, history, metric="accuracy"):
-    # Create a separate plot for each model
     plt.figure(figsize=(12, 8))
 
     colors = {
@@ -15,11 +13,9 @@ def plot_training_vs_testing(model_name, history, metric="accuracy"):
     
     color = colors.get(model_name, "black")
     
-    # Plot training and validation
     plt.plot(history['train'][metric], label=f'{model_name} Train', color=color, linestyle='-')
     plt.plot(history['test'][metric], label=f'{model_name} Test', color=color, linestyle='--')
 
-    # Set the title and labels
     plt.title(f"{model_name} - Training vs Testing {metric.capitalize()}", fontsize=16)
     plt.xlabel("Epochs", fontsize=14)
     plt.ylabel(metric.capitalize(), fontsize=14)
@@ -27,23 +23,21 @@ def plot_training_vs_testing(model_name, history, metric="accuracy"):
     plt.grid(True)
     plt.tight_layout()
 
-    # Save the plot in the 'Graphs' folder
     plt.savefig(f"Graphs/{model_name}_{metric}_comparison.png")
-    plt.close()  # Close the plot to avoid memory overflow during multiple saves
+    plt.close()
 
 def load_histories():
     history_files = {
         "model_relu": "Histories/model_relu_history.json",
         "model_leaky_relu": "Histories/model_leaky_relu_history.json",
-        "model_elu": "Histories/model_elu_history.json",
-        "model_sparsemax": "Histories/model_sparsemax_history.json",
+        "model_elu": "Histories/model_elu_history.json"
     }
 
     histories = {}
     for model_name, filepath in history_files.items():
         try:
             with open(filepath, "r") as f:
-                history = json.load(f)  # Make sure this line uses the json module
+                history = json.load(f)
                 histories[model_name] = {
                     "train": {
                         "accuracy": history.get("accuracy", []),
@@ -62,7 +56,6 @@ def load_histories():
 def main():
     histories = load_histories()
 
-    # Plot individual graphs for accuracy and loss
     for model_name, history in histories.items():
         plot_training_vs_testing(model_name, history, metric="accuracy")
         plot_training_vs_testing(model_name, history, metric="loss")

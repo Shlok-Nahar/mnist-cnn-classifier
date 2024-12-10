@@ -2,7 +2,7 @@ from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
 import json
 import os
-from models import create_model_relu, create_model_leaky_relu, create_model_elu, create_model_sparsemax
+from models import create_model_relu, create_model_leaky_relu, create_model_elu
 
 # Function to load and preprocess the MNIST data
 def load_data():
@@ -64,11 +64,6 @@ def main():
     print("Training Model with ELU activation")
     model_elu = create_model_elu()
     train_and_evaluate_model(model_elu, "model_elu")
-
-    # Model 4: SparseMax
-    print("Training Model with SparseMax activation")
-    model_sparsemax = create_model_sparsemax()
-    train_and_evaluate_model(model_sparsemax, "model_sparsemax")
 
 if __name__ == '__main__':
     main()
