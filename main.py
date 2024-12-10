@@ -1,8 +1,6 @@
-import tensorflow as tf
-import sys
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
-from models import create_model_leaky_relu, create_model_elu, create_model_sparsemax
+from models import create_model_relu, create_model_leaky_relu, create_model_elu, create_model_sparsemax
 
 # print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 
@@ -33,17 +31,23 @@ def train_and_evaluate_model(model, model_name):
     return model
 
 def main():
-    # Model 1: Leaky ReLU
+
+    # Model 1: ReLU
+    print("Training Model with ReLU activation")
+    model_relu = create_model_relu()
+    train_and_evaluate_model(model_relu, "model_relu")
+
+    # Model 2: Leaky ReLU
     print("Training Model with Leaky ReLU activation")
     model_leaky_relu = create_model_leaky_relu()
     train_and_evaluate_model(model_leaky_relu, "model_leaky_relu")
 
-    # Model 2: ELU
+    # Model 3: ELU
     print("Training Model with ELU activation")
     model_elu = create_model_elu()
     train_and_evaluate_model(model_elu, "model_elu")
 
-    # Model 3: SparseMax
+    # Model 4: SparseMax
     print("Training Model with SparseMax activation")
     model_sparsemax = create_model_sparsemax()
     train_and_evaluate_model(model_sparsemax, "model_sparsemax")
