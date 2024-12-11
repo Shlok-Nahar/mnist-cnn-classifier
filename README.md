@@ -1,6 +1,6 @@
 # MINST-CNN-Classifier
 
-This repository contains Python scripts for analyzing the performance of **three** CNN models trained on the MNIST dataset. It includes functionality to evaluate and compare models using training and testing metrics.
+This repository contains Python scripts for analyzing the performance of `three CNN models` trained on the MNIST dataset. It includes functionality to evaluate and compare models using training and testing metrics.
 
 ## Features
 
@@ -8,6 +8,7 @@ This repository contains Python scripts for analyzing the performance of **three
 - **Comparison Table**: Outputs a clean table comparing training and testing accuracy and loss for each model.
 - **Model Histories**: Reads training histories saved as JSON files.
 - **Extensible**: Easily add more models by updating the `history_files` dictionary.
+
 ## How to Use
 
 **Run main.py**: To train the models.
@@ -33,7 +34,10 @@ model_elu           Accuracy  0.9938    0.9876
                     Loss      0.0183    0.0504  
 ```
 
-**Run visalise.py**: There are 5 types of visualisations in the Visualisations folder:
+**Run visualise.py**: There are 5 types of visualisations in the Visualisations folder:
+```bash
+python visualise.py
+```
 - Confusion Matrix
 - Graphs
 - Layer-wise Heatmaps (purely for showcasing)
