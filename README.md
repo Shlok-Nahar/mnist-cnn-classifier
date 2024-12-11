@@ -1,5 +1,4 @@
 # MINST-CNN-Classifier
-# Model Performance Analysis
 
 This repository contains Python scripts for analyzing the performance of **three** CNN models trained on the MNIST dataset. It includes functionality to evaluate and compare models using training and testing metrics.
 
