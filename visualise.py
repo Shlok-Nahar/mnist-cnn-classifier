@@ -38,9 +38,6 @@ def main():
         
         # Feature Maps
         plot_feature_maps(model, test_images, model_name)
-        
-        # Model Architecture
-        plot_model_architecture(model, model_name)
 
 if __name__ == "__main__":
     main()

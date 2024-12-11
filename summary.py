@@ -1,30 +1,31 @@
-import matplotlib.pyplot as plt
 import json
 
-def plot_training_vs_testing(model_name, history, metric="accuracy"):
-    plt.figure(figsize=(12, 8))
+def generate_comparison_table(histories):
+    table_data = []
 
-    colors = {
-        "model_relu": "blue",
-        "model_leaky_relu": "green",
-        "model_elu": "orange",
-        "model_sparsemax": "red",
-    }
-    
-    color = colors.get(model_name, "black")
-    
-    plt.plot(history['train'][metric], label=f'{model_name} Train', color=color, linestyle='-')
-    plt.plot(history['test'][metric], label=f'{model_name} Test', color=color, linestyle='--')
+    for model_name, history in histories.items():
+        train_accuracy = history['train']['accuracy'][-1] if history['train']['accuracy'] else None
+        test_accuracy = history['test']['accuracy'][-1] if history['test']['accuracy'] else None
+        train_loss = history['train']['loss'][-1] if history['train']['loss'] else None
+        test_loss = history['test']['loss'][-1] if history['test']['loss'] else None
 
-    plt.title(f"{model_name} - Training vs Testing {metric.capitalize()}", fontsize=16)
-    plt.xlabel("Epochs", fontsize=14)
-    plt.ylabel(metric.capitalize(), fontsize=14)
-    plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
+        table_data.append({
+            "Model": model_name,
+            "Accuracy Train": train_accuracy,
+            "Accuracy Test": test_accuracy,
+            "Loss Train": train_loss,
+            "Loss Test": test_loss
+        })
 
-    plt.savefig(f"Graphs/{model_name}_{metric}_comparison.png")
-    plt.close()
+    # Print the table
+    print("\nModel Performance Comparison")
+    print("=" * 50)
+    print(f"{'Model':<20}{'Metric':<10}{'Train':<10}{'Test':<10}")
+    print("-" * 50)
+
+    for row in table_data:
+        print(f"{row['Model']:<20}{'Accuracy':<10}{row['Accuracy Train']:<10.4f}{row['Accuracy Test']:<10.4f}")
+        print(f"{'':<20}{'Loss':<10}{row['Loss Train']:<10.4f}{row['Loss Test']:<10.4f}")
 
 def load_histories():
     history_files = {
@@ -55,10 +56,7 @@ def load_histories():
 
 def main():
     histories = load_histories()
-
-    for model_name, history in histories.items():
-        plot_training_vs_testing(model_name, history, metric="accuracy")
-        plot_training_vs_testing(model_name, history, metric="loss")
+    generate_comparison_table(histories)
 
 if __name__ == "__main__":
     main()

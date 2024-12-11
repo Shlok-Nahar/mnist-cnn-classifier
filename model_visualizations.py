@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import plot_model
 from sklearn.preprocessing import label_binarize
 
-def plot_training_vs_testing(histories, save_dir="Graphs"):
+def plot_training_vs_testing(histories, save_dir="Visualisations/Graphs"):
     # Colors for consistent distinction
     colors = {
         "model_relu": "blue",
@@ -79,7 +79,7 @@ def plot_confusion_matrix(model, test_images, test_labels, model_name):
     plt.xlabel("Predicted")
     plt.ylabel("True")
     plt.tight_layout()
-    plt.savefig(f"Confusion Matrix/{model_name}_confusion_matrix.png")
+    plt.savefig(f"Visualisations/Confusion Matrix/{model_name}_confusion_matrix.png")
     plt.close()
 
 def plot_roc_curve(model, test_images, test_labels, model_name):
@@ -106,7 +106,7 @@ def plot_roc_curve(model, test_images, test_labels, model_name):
     plt.ylabel('True Positive Rate')
     plt.title(f'ROC Curve for {model_name}')
     plt.legend(loc="lower right")
-    plt.savefig(f'ROC/{model_name}_roc_curve.png')
+    plt.savefig(f'Visualisations/ROC/{model_name}_roc_curve.png')
     plt.close()
 
 def plot_precision_recall_curve(model, test_images, test_labels, model_name):
@@ -130,7 +130,7 @@ def plot_precision_recall_curve(model, test_images, test_labels, model_name):
     plt.ylabel('Precision')
     plt.title(f'Precision-Recall Curve for {model_name}')
     plt.legend(loc="best")
-    plt.savefig(f'Precision-Recall/{model_name}_precision_recall_curve.png')
+    plt.savefig(f'Visualisations/Precision-Recall/{model_name}_precision_recall_curve.png')
     plt.close()
 
 def plot_feature_maps(model, test_images, model_name):
@@ -154,8 +154,5 @@ def plot_feature_maps(model, test_images, model_name):
         plt.figure(figsize=(10, 10))
         plt.title(f"{model_name} - Feature Maps of Layer {layer_idx+1}")
         plt.imshow(display_grid, aspect='auto', cmap='viridis')
-        plt.savefig(f"Heatmap/{model_name}_layer{layer_idx+1}_feature_map.png")
+        plt.savefig(f"Visualisations/Heatmap/{model_name}_layer{layer_idx+1}_feature_map.png")
         plt.close()
-
-def plot_model_architecture(model, model_name):
-    plot_model(model, to_file=f"Model Architecture/{model_name}_architecture.png", show_shapes=True, show_layer_names=True)
