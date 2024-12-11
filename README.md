@@ -23,15 +23,15 @@ python summary.py
 
 ```
 Model Performance Comparison
-============================
-Model               Metric    Train     Test
+==================================================
+Model               Metric    Train     Test      
 --------------------------------------------------
-model_relu          Accuracy  0.9943    0.9877
-                    Loss      0.0178    0.0530
-model_leaky_relu    Accuracy  0.9937    0.9883
-                    Loss      0.0049    0.0083
-model_elu           Accuracy  0.9938    0.9876
-                    Loss      0.0183    0.0504
+model_relu          Accuracy  0.9943    0.9877    
+                    Loss      0.0178    0.0530    
+model_leaky_relu    Accuracy  0.9937    0.9883    
+                    Loss      0.0049    0.0083    
+model_elu           Accuracy  0.9938    0.9876    
+                    Loss      0.0183    0.0504  
 ```
 
 **Run visalise.py**: There are 5 types of visualisations in the Visualisations folder:
